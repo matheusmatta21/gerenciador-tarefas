@@ -42,7 +42,7 @@ class TarefaService {
       throw new Error('Tarefa não encontrada');
     }
 
-    if (tarefa.projetoId !== projetoId) {
+    if (tarefa.projetoId !== parseInt(projetoId)) {
       throw new Error('Tarefa não pertence a este projeto');
     }
 
