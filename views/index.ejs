@@ -1,0 +1,16 @@
+<div class="hero">
+  <h1>Bem-vindo ao Gerenciador de Tarefas de Estudo</h1>
+  <p>Organize seus projetos e tarefas com facilidade</p>
+  
+  <% if (!locals.usuario) { %>
+    <div class="cta-buttons">
+      <a href="/auth/login" class="btn btn-primary">Fazer Login</a>
+      <a href="/auth/registro" class="btn btn-secondary">Criar Conta</a>
+    </div>
+  <% } else { %>
+    <div class="cta-buttons">
+      <a href="/projetos/lista" class="btn btn-primary">Meus Projetos</a>
+      <a href="/tarefas/dashboard" class="btn btn-secondary">Dashboard</a>
+    </div>
+  <% } %>
+</div>

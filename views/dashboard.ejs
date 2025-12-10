@@ -1,0 +1,39 @@
+<div class="dashboard">
+  <h2>📊 Dashboard de Tarefas</h2>
+
+  <div class="dashboard-stats">
+    <div class="stat-box">
+      <h3>Por Status</h3>
+      <ul>
+        <li>Pendentes: <strong><%= estatisticas.porStatus.pendente %></strong></li>
+        <li>Em Progresso: <strong><%= estatisticas.porStatus.em_progresso %></strong></li>
+        <li>Concluídas: <strong><%= estatisticas.porStatus.concluida %></strong></li>
+      </ul>
+    </div>
+
+    <div class="stat-box">
+      <h3>Por Prioridade</h3>
+      <ul>
+        <li>Baixa: <strong><%= estatisticas.porPrioridade.baixa %></strong></li>
+        <li>Média: <strong><%= estatisticas.porPrioridade.média %></strong></li>
+        <li>Alta: <strong><%= estatisticas.porPrioridade.alta %></strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="projetos-resumo">
+    <h3>Seus Projetos</h3>
+    <% if (projetos.length === 0) { %>
+      <p>Nenhum projeto criado. <a href="/projetos/novo">Crie um!</a></p>
+    <% } else { %>
+      <ul>
+        <% projetos.forEach(p => { %>
+          <li>
+            <a href="/tarefas/<%= p.id %>/lista"><%= p.titulo %></a>
+            <span class="prazo">(<%= new Date(p.prazo).toLocaleDateString('pt-BR') %>)</span>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
+</div>

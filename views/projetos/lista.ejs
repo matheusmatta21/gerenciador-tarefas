@@ -1,0 +1,24 @@
+<div class="list-header">
+  <a href="/projetos/novo" class="btn btn-primary">+ Novo Projeto</a>
+</div>
+
+<% if (!projetos || projetos.length === 0) { %>
+  <p>Você não tem projetos ainda. <a href="/projetos/novo">Crie um!</a></p>
+<% } else { %>
+  <div class="projetos-grid">
+    <% projetos.forEach(p => { %>
+      <div class="card">
+        <h3><%= p.titulo %></h3>
+        <p><%= p.descricao %></p>
+        <p class="meta">Prazo: <%= new Date(p.prazo).toLocaleDateString('pt-BR') %></p>
+        <div class="actions">
+          <a href="/tarefas/<%= p.id %>/lista" class="btn btn-small">Tarefas</a>
+          <a href="/projetos/<%= p.id %>/editar" class="btn btn-small">Editar</a>
+          <form method="post" action="/projetos/<%= p.id %>/excluir" style="display:inline">
+            <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Tem certeza?')">Excluir</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } %>

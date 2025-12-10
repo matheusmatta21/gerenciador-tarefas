@@ -1,0 +1,28 @@
+<div class="form-container">
+  <form method="post" class="form">
+    <div class="form-group">
+      <label for="titulo">Título*</label>
+      <input id="titulo" name="titulo" type="text" value="<%= projeto.titulo || '' %>" required>
+      <% if (errors.titulo) { %><span class="error"><%= errors.titulo.msg %></span><% } %>
+    </div>
+
+    <div class="form-group">
+      <label for="descricao">Descrição*</label>
+      <textarea id="descricao" name="descricao" rows="4" required><%= projeto.descricao || '' %></textarea>
+      <% if (errors.descricao) { %><span class="error"><%= errors.descricao.msg %></span><% } %>
+    </div>
+
+    <div class="form-group">
+      <label for="prazo">Prazo*</label>
+      <input id="prazo" name="prazo" type="date" value="<%= projeto.prazo ? projeto.prazo.toISOString().split('T')[0] : '' %>" required>
+      <% if (errors.prazo) { %><span class="error"><%= errors.prazo.msg %></span><% } %>
+    </div>
+
+    <% if (errors.geral) { %><div class="alert alert-error"><%= errors.geral.msg %></div><% } %>
+
+    <button type="submit" class="btn btn-primary">
+      <%= projeto.id ? 'Atualizar' : 'Criar' %> Projeto
+    </button>
+    <a href="/projetos/lista" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>

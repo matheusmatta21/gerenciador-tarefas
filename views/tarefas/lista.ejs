@@ -1,0 +1,53 @@
+<div class="tarefas-header">
+  <h3><%= projeto.titulo %></h3>
+  <a href="/tarefas/<%= projeto.id %>/nova" class="btn btn-primary">+ Nova Tarefa</a>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <span class="stat-label">Pendentes:</span>
+    <span class="stat-value"><%= stats.porStatus.pendente %></span>
+  </div>
+  <div class="stat">
+    <span class="stat-label">Em Progresso:</span>
+    <span class="stat-value"><%= stats.porStatus.em_progresso %></span>
+  </div>
+  <div class="stat">
+    <span class="stat-label">Concluídas:</span>
+    <span class="stat-value"><%= stats.porStatus.concluida %></span>
+  </div>
+</div>
+
+<% if (!tarefas || tarefas.length === 0) { %>
+  <p>Nenhuma tarefa neste projeto. <a href="/tarefas/<%= projeto.id %>/nova">Crie uma!</a></p>
+<% } else { %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Status</th>
+        <th>Prioridade</th>
+        <th>Prazo</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% tarefas.forEach(t => { %>
+        <tr>
+          <td><%= t.titulo %></td>
+          <td><span class="badge badge-<%= t.status %>"><%= t.status.replace('_', ' ') %></span></td>
+          <td><span class="badge badge-<%= t.prioridade %>"><%= t.prioridade %></span></td>
+          <td><%= new Date(t.prazo).toLocaleDateString('pt-BR') %></td>
+          <td>
+            <a href="/tarefas/<%= projeto.id %>/<%= t.id %>/editar">Editar</a> |
+            <form method="post" action="/tarefas/<%= projeto.id %>/<%= t.id %>/excluir" style="display:inline">
+              <button type="submit" onclick="return confirm('Tem certeza?')">Excluir</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<p><a href="/projetos/lista">← Voltar aos projetos</a></p>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erro <%= status || 500 %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <h1><a href="/">Gerenciador de Tarefas</a></h1>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="error-page">
+      <h1>❌ Erro <%= status || 500 %></h1>
+      <p><%= message %></p>
+      
+      <% if (locals.error && Object.keys(error).length > 0) { %>
+        <details>
+          <summary>Detalhes técnicos (desenvolvimento)</summary>
+          <pre><%= JSON.stringify(error, null, 2) %></pre>
+        </details>
+      <% } %>
+      
+      <a href="/" class="btn btn-primary">Voltar à Home</a>
+    </div>
+  </main>
+</body>
+</html>

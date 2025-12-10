@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> - Gerenciador de Tarefas</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <h1><a href="/">Gerenciador de Tarefas</a></h1>
+      <ul>
+        <% if (locals.usuario) { %>
+          <li><a href="/projetos/lista">Meus Projetos</a></li>
+          <li><a href="/tarefas/dashboard">Dashboard</a></li>
+          <li><a href="/auth/logout">Sair</a></li>
+        <% } else { %>
+          <li><a href="/auth/login">Login</a></li>
+          <li><a href="/auth/registro">Registrar</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h2><%= title %></h2>
+    <%- body %>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Gerenciador de Tarefas. Desenvolvido por Hugo e Matheus.</p>
+  </footer>
+</body>
+</html>

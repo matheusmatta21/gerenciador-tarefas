@@ -1,0 +1,26 @@
+<div class="form-container">
+  <form method="post" action="/auth/registro" class="form">
+    <div class="form-group">
+      <label for="nome">Nome*</label>
+      <input id="nome" name="nome" type="text" value="<%= data.nome || '' %>" required>
+      <% if (errors.nome) { %><span class="error"><%= errors.nome.msg %></span><% } %>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email*</label>
+      <input id="email" name="email" type="email" value="<%= data.email || '' %>" required>
+      <% if (errors.email) { %><span class="error"><%= errors.email.msg %></span><% } %>
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Senha*</label>
+      <input id="senha" name="senha" type="password" required>
+      <% if (errors.senha) { %><span class="error"><%= errors.senha.msg %></span><% } %>
+    </div>
+
+    <% if (errors.geral) { %><div class="alert alert-error"><%= errors.geral.msg %></div><% } %>
+
+    <button type="submit" class="btn btn-primary">Registrar</button>
+    <p>Já tem conta? <a href="/auth/login">Faça login aqui</a></p>
+  </form>
+</div>
