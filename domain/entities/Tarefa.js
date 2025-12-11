@@ -12,7 +12,15 @@ class Tarefa {
     this.titulo = titulo;
     this.status = status; // 'pendente', 'em_progresso', 'concluida'
     this.prioridade = prioridade; // 'baixa', 'média', 'alta'
-    this.prazo = new Date(prazo);
+    
+    // Normalizar data para evitar problemas de fuso horário
+    if (typeof prazo === 'string' && prazo.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      // Se vier no formato YYYY-MM-DD, adicionar horário local
+      this.prazo = new Date(prazo + 'T00:00:00');
+    } else {
+      this.prazo = new Date(prazo);
+    }
+    
     this.projetoId = projetoId;
     this.criadoEm = criadoEm;
   }
@@ -27,9 +35,14 @@ class Tarefa {
     if (!['baixa', 'média', 'alta'].includes(this.prioridade)) {
       throw new Error('Prioridade deve ser: baixa, média ou alta');
     }
-    if (!this.prazo || this.prazo < new Date()) {
+    
+    // Comparar apenas a data (sem hora) para permitir prazo de hoje
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    if (!this.prazo || this.prazo < hoje) {
       throw new Error('Prazo deve ser a partir de hoje');
     }
+    
     if (!this.projetoId) {
       throw new Error('ProjetoId é obrigatório');
     }

@@ -3,7 +3,15 @@ class Projeto {
     this.id = id;
     this.titulo = titulo;
     this.descricao = descricao;
-    this.prazo = new Date(prazo); // Garantir que é Date
+    
+    // Normalizar data para evitar problemas de fuso horário
+    if (typeof prazo === 'string' && prazo.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      // Se vier no formato YYYY-MM-DD, adicionar horário local
+      this.prazo = new Date(prazo + 'T00:00:00');
+    } else {
+      this.prazo = new Date(prazo);
+    }
+    
     this.ownerId = ownerId;
     this.criadoEm = criadoEm;
   }
@@ -15,9 +23,14 @@ class Projeto {
     if (!this.descricao) {
       throw new Error('Descrição é obrigatória');
     }
-    if (!this.prazo || this.prazo < new Date()) {
+    
+    // Comparar apenas a data (sem hora) para permitir prazo de hoje
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    if (!this.prazo || this.prazo < hoje) {
       throw new Error('Prazo deve ser a partir de hoje');
     }
+    
     if (!this.ownerId) {
       throw new Error('Proprietário (ownerId) é obrigatório');
     }
