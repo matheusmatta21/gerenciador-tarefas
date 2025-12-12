@@ -1,5 +1,12 @@
 <%- include('../layout') %>
-<div class="list-header">
+<div class="list-header-project">
+  <form method="get" action="/projetos/lista" style="display: flex; gap: 10px; margin-bottom: 20px;">
+    <input type="text" name="busca" placeholder="Buscar projeto..." value="<%= busca || '' %>" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+    <% if (busca) { %>
+      <a href="/projetos/lista" class="btn btn-secondary">Limpar</a>
+    <% } %>
+  </form>
   <a href="/projetos/novo" class="btn btn-primary">+ Novo Projeto</a>
 </div>
 

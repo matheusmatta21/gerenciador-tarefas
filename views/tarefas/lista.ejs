@@ -3,6 +3,15 @@
   <h3>Titulo: <%= projeto.titulo %></h3>
   <a href="/tarefas/<%= projeto.id %>/nova" class="btn btn-primary">+ Nova Tarefa</a>
 </div>
+<div class="filtro-tarefas">
+<form method="get" action="/tarefas/<%= projeto.id %>/lista" style="margin-bottom: 20px; display: flex; gap: 10px; max-width: 600px;">
+  <input type="text" name="busca" placeholder="Buscar tarefa..." value="<%= busca || '' %>" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+  <button type="submit" class="btn btn-primary">Buscar</button>
+  <% if (busca) { %>
+    <a href="/tarefas/<%= projeto.id %>/lista" class="btn btn-secondary">Limpar</a>
+  <% } %>
+</form>
+</div>
 
 <div class="stats">
   <div class="stat">
